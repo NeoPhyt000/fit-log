@@ -1,7 +1,4 @@
 @import "tailwindcss";
-@plugin "daisyui";
-
-@import "tailwindcss";
 
 @plugin "daisyui" {
   themes: false;
@@ -73,13 +70,28 @@ body {
   color: var(--color-primary-content);
 }
 
-.container-app {
+/* A simple full-width wrapper that just adds left/right padding.
+   Unlike a typical ".container" class, this does NOT set a max-width
+   or "margin: auto" — so content stretches edge-to-edge on every
+   screen size and is never centered into a narrow column. */
+.site-padding {
   width: 100%;
-  max-width: 1280px;
-  margin-left: auto;
-  margin-right: auto;
   padding-left: 1.25rem;
   padding-right: 1.25rem;
+}
+
+@media (min-width: 640px) {
+  .site-padding {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .site-padding {
+    padding-left: 3rem;
+    padding-right: 3rem;
+  }
 }
 
 @keyframes toast-in {
