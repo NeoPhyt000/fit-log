@@ -49,8 +49,8 @@
 }
 
 @theme inline {
-  --font-display: "Oswald", "Arial Narrow", sans-serif;
-  --font-sans: "Inter", Arial, Helvetica, sans-serif;
+  --font-display: var(--font-oswald), "Arial Narrow", sans-serif;
+  --font-sans: var(--font-inter), Arial, Helvetica, sans-serif;
 }
 
 * {
@@ -62,7 +62,7 @@ html {
 }
 
 body {
-  font-family: "Inter", Arial, Helvetica, sans-serif;
+  font-family: var(--font-inter), Arial, Helvetica, sans-serif;
 }
 
 ::selection {
@@ -70,10 +70,6 @@ body {
   color: var(--color-primary-content);
 }
 
-/* A simple full-width wrapper that just adds left/right padding.
-   Unlike a typical ".container" class, this does NOT set a max-width
-   or "margin: auto" — so content stretches edge-to-edge on every
-   screen size and is never centered into a narrow column. */
 .site-padding {
   width: 100%;
   padding-left: 1.25rem;

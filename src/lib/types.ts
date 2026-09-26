@@ -1,4 +1,3 @@
-
 export interface Workout {
   id: number;
   name: string;
@@ -6,7 +5,7 @@ export interface Workout {
   muscleGroups: string[];
   equipment: string;
   difficulty: string;
-  duration: number; 
+  duration: number;
   caloriesBurned: number;
   sets: number;
   reps: string;
@@ -15,14 +14,12 @@ export interface Workout {
   instructions: string[];
 }
 
-
 export type PlanStatus = "pending" | "done";
 
 export interface PlanItem {
   workout: Workout;
   status: PlanStatus;
-  addedAt: number; 
+  addedAt: number;
 }
-
 
 export type SortKey = "duration" | "calories" | "rating";

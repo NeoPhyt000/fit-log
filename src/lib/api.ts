@@ -12,23 +12,17 @@ export async function getWorkouts(): Promise<Workout[]> {
   return res.json();
 }
 
-
 export async function getWorkout(id: string | number): Promise<Workout> {
-  try {
-    
-    const res = await fetch(`${BASE_URL}/${id}`, { cache: "no-store" });
+  const singleRes = await fetch(`${BASE_URL}/${id}`, {
+    cache: "no-store",
+  }).catch(() => null);
 
-    if (res.ok) {
-      const data = await res.json();
-      
-      const workout = Array.isArray(data) ? data[0] : data;
-      if (workout && workout.id) return workout as Workout;
-    }
-  } catch {
-    
+  if (singleRes && singleRes.ok) {
+    const data = await singleRes.json();
+    const workout = Array.isArray(data) ? data[0] : data;
+    if (workout && workout.id) return workout as Workout;
   }
 
- 
   const allWorkouts = await getWorkouts();
   const found = allWorkouts.find((w) => String(w.id) === String(id));
 

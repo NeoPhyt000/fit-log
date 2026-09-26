@@ -1,36 +1,60 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 💪 FitLog — Workout Library
 
-## Getting Started
+FitLog is a dark, no-nonsense gym companion built with Next.js. Browse a library of twelve lifts, open a detailed breakdown of any exercise, lock lifts into **Today's Plan** (capped at five), **Save** others for later, and watch your daily exercise/minutes/calories totals update live — all persisted locally so your plan survives a refresh.
 
-First, run the development server:
+Live data is pulled from the FitLog API: `https://api.abcz.workers.dev/api/fitlog`.
+
+## 🛠️ Technologies Used
+
+- **Next.js 16** (App Router)
+- **React 19** + **TypeScript**
+- **Tailwind CSS v4** + **daisyUI v5** (custom `fitlog` theme) for styling and full responsiveness
+- **lucide-react** for icons
+- Browser **localStorage** for persisting the plan/saved state
+- FitLog REST API for workout data
+
+## ✨ Key Features
+
+1. **Responsive workout library** — a 3×4 card grid on desktop that collapses gracefully to 2 columns on tablet and 1 column on mobile, each card showing an image, category tags, equipment, and a duration/calories/rating stats row.
+2. **Sort By dropdown** — instantly re-sorts the library by Duration, Calories, or Rating.
+3. **Workout detail pages** (`/workout/[id]`) with a full spec panel (equipment, difficulty, sets, reps, duration, calories, rating) and numbered step-by-step instructions.
+4. **Today's Plan & Saved system** — "Add to today's plan" and "Save for later" buttons update the navbar's live Plan/Saved badge counters and fire toast notifications; the plan is capped at 5 lifts.
+5. **My Plan dashboard** (`/my-plan`) — live Exercises / Minutes / Calories summary cards, tabbed Today's Plan / Saved lists, Mark as Done and Remove actions, a loading state, and a friendly empty state.
+6. **Persistent state** — the plan and saved lists are stored in `localStorage`, so they survive a page reload.
+7. **Polished error handling** — a custom 404 page, graceful API error states, and loading indicators throughout.
+8. **Custom daisyUI theme** — a hand-tuned `fitlog` daisyUI theme (dark base colors, lime `#ccff00` primary, pill-shaped buttons/badges) applied consistently across buttons, cards, tabs, stats, and alerts.
+
+## 🚀 Getting Started
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Build for production
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run build
+npm run start
+```
 
-## Learn More
+## 📁 Project Structure
 
-To learn more about Next.js, take a look at the following resources:
+```
+src/
+  app/
+    page.tsx                 # Home (Hero + Library)
+    workout/[id]/page.tsx    # Workout detail page
+    my-plan/page.tsx         # My Plan dashboard
+    not-found.tsx            # 404 page
+    layout.tsx / globals.css # Root layout & theme
+  components/                # Navbar, Footer, WorkoutCard, PlanCard, etc.
+  context/                   # PlanContext (plan/saved state), ToastContext
+  lib/                       # API client, types, storage helpers
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 📦 Deployment
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+This project deploys cleanly to Vercel (`vercel deploy`) or any Node hosting that supports Next.js. Remote workout images are whitelisted in `next.config.ts` under `images.remotePatterns`.

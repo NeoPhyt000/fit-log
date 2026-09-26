@@ -1,9 +1,8 @@
-
 import Image from "next/image";
 import Link from "next/link";
 import { Check, X } from "lucide-react";
-import { PlanItem } from "@/lib/types"
-
+import { PlanItem } from "@/lib/types";
+import StatsRow from "./StatsRow";
 
 export default function PlanCard({
   item,
@@ -14,7 +13,7 @@ export default function PlanCard({
   item: PlanItem;
   variant: "plan" | "saved";
   onRemove: () => void;
-  onMarkDone?: () => void; 
+  onMarkDone?: () => void;
 }) {
   const { workout, status } = item;
   const isDone = status === "done";
@@ -27,7 +26,6 @@ export default function PlanCard({
           : "border-base-300 bg-base-200"
       }`}
     >
-      
       <div className="relative h-20 w-20 shrink-0 overflow-hidden rounded-field bg-base-300 sm:h-16 sm:w-16">
         <Image
           src={workout.image}
@@ -37,13 +35,17 @@ export default function PlanCard({
         />
       </div>
 
-      
       <div className="flex-1">
         <h3 className="font-display text-base font-bold uppercase tracking-wide">
           {workout.name}
         </h3>
         <p className="text-xs text-base-content/60">{workout.equipment}</p>
-    
+        <StatsRow
+          duration={workout.duration}
+          calories={workout.caloriesBurned}
+          rating={workout.rating}
+          className="mt-1.5"
+        />
       </div>
 
       <div className="flex flex-wrap items-center gap-2">
@@ -53,7 +55,7 @@ export default function PlanCard({
         >
           View Details
         </Link>
-       
+
         {variant === "plan" && onMarkDone && (
           <button
             onClick={onMarkDone}
